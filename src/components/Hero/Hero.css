@@ -1,0 +1,229 @@
+/* ========================================
+   HERO - AWARD-WINNING FULL-BLEED
+   ======================================== */
+.hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Full-Bleed Video */
+.hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.hero__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+            rgba(31, 31, 55, 0.85) 0%,
+            rgba(39, 20, 42, 0.8) 50%,
+            rgba(39, 20, 42, 0.95) 100%);
+}
+
+/* Content */
+.hero__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 var(--space-2xl);
+}
+
+/* Headline - Massive Typography */
+.hero__headline {
+    margin-bottom: var(--space-xl);
+    overflow: hidden;
+    text-align: center;
+}
+
+.hero__line {
+    display: block;
+    overflow: hidden;
+    text-align: center;
+}
+
+.hero__word {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 10vw, 9rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--soft-white);
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero--loaded .hero__line:nth-child(1) .hero__word {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+}
+
+.hero--loaded .hero__line:nth-child(2) .hero__word {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.35s;
+    color: var(--antique-gold);
+}
+
+.hero--loaded .hero__line:nth-child(3) .hero__word {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.5s;
+}
+
+/* Bottom Content */
+.hero__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xl);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s;
+    margin-top: var(--space-2xl);
+}
+
+.hero--loaded .hero__bottom {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero__tagline {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-style: italic;
+    color: rgba(255, 254, 249, 0.7);
+    letter-spacing: 0.05em;
+}
+
+.hero__cta {
+    position: relative;
+    display: inline-block;
+    padding: var(--space-lg) var(--space-3xl);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--deep-navy);
+    background: var(--antique-gold);
+    text-decoration: none;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero__cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--soft-white);
+    transition: left 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero__cta:hover::before {
+    left: 0;
+}
+
+.hero__cta span {
+    position: relative;
+    z-index: 1;
+}
+
+.hero__cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(193, 141, 81, 0.3);
+}
+
+/* Scroll Indicator */
+.hero__scroll {
+    position: absolute;
+    bottom: var(--space-3xl);
+    left: var(--space-3xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    opacity: 0;
+    animation: fadeIn 1s ease 1.5s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.hero__scroll-text {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(255, 254, 249, 0.5);
+    writing-mode: vertical-rl;
+}
+
+.hero__scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--antique-gold), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+
+    0%,
+    100% {
+        transform: scaleY(0);
+        transform-origin: top;
+    }
+
+    50% {
+        transform: scaleY(1);
+        transform-origin: top;
+    }
+
+    51% {
+        transform-origin: bottom;
+    }
+
+    100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero__word {
+        font-size: clamp(3rem, 18vw, 6rem);
+    }
+
+    .hero__scroll {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .hero__scroll-text {
+        writing-mode: horizontal-tb;
+    }
+
+    .hero__scroll-line {
+        height: 40px;
+    }
+}

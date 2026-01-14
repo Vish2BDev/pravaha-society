@@ -1,0 +1,313 @@
+.footer {
+    background: var(--deep-navy);
+    position: relative;
+    padding-top: var(--space-4xl);
+}
+
+/* Wave Decoration */
+.footer__wave {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    right: 0;
+    height: 100px;
+    overflow: hidden;
+}
+
+.footer__wave svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--deep-navy);
+}
+
+.footer__container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Grid Layout */
+.footer__grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+    gap: var(--space-3xl);
+    padding-bottom: var(--space-4xl);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Brand Section */
+.footer__logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.footer__logo-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.footer__logo-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.footer__logo-text {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--soft-white);
+}
+
+.footer__tagline {
+    font-size: var(--text-sm);
+    font-style: italic;
+    color: var(--antique-gold);
+    margin-bottom: var(--space-md);
+}
+
+.footer__description {
+    font-size: var(--text-sm);
+    color: rgba(255, 254, 249, 0.7);
+    line-height: 1.7;
+    margin-bottom: var(--space-lg);
+}
+
+/* Social Links */
+.footer__social {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.footer__social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--soft-white);
+    transition: all var(--transition-base);
+}
+
+.footer__social-link:hover {
+    background: var(--antique-gold);
+    color: var(--deep-navy);
+    transform: translateY(-3px);
+}
+
+/* Sections */
+.footer__heading {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--soft-white);
+    margin-bottom: var(--space-lg);
+    position: relative;
+}
+
+.footer__heading::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--antique-gold);
+    border-radius: var(--radius-full);
+}
+
+/* Links */
+.footer__links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.footer__link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: rgba(255, 254, 249, 0.7);
+    transition: all var(--transition-fast);
+}
+
+.footer__link svg {
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: all var(--transition-fast);
+    color: var(--antique-gold);
+}
+
+.footer__link:hover {
+    color: var(--antique-gold);
+    transform: translateX(5px);
+}
+
+.footer__link:hover svg {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Contact */
+.footer__contact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.footer__contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: rgba(255, 254, 249, 0.7);
+}
+
+.footer__contact-item svg {
+    color: var(--antique-gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.footer__contact-item a {
+    transition: color var(--transition-fast);
+}
+
+.footer__contact-item a:hover {
+    color: var(--antique-gold);
+}
+
+/* Newsletter */
+.footer__newsletter-text {
+    font-size: var(--text-sm);
+    color: rgba(255, 254, 249, 0.7);
+    margin-bottom: var(--space-lg);
+}
+
+.footer__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.footer__input-wrapper {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: border-color var(--transition-fast);
+}
+
+.footer__input-wrapper:focus-within {
+    border-color: var(--antique-gold);
+}
+
+.footer__input {
+    flex: 1;
+    padding: var(--space-md);
+    background: transparent;
+    border: none;
+    font-size: var(--text-sm);
+    color: var(--soft-white);
+    outline: none;
+}
+
+.footer__input::placeholder {
+    color: rgba(255, 254, 249, 0.5);
+}
+
+.footer__submit {
+    padding: var(--space-md) var(--space-lg);
+    background: var(--gradient-gold);
+    color: var(--deep-navy);
+    font-weight: 600;
+    transition: all var(--transition-base);
+}
+
+.footer__submit:hover {
+    filter: brightness(1.1);
+}
+
+.footer__success {
+    font-size: var(--text-sm);
+    color: #4ade80;
+}
+
+/* Bottom Bar */
+.footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-xl) 0;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.footer__copyright,
+.footer__credit {
+    font-size: var(--text-sm);
+    color: rgba(255, 254, 249, 0.5);
+}
+
+.footer__credit {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.footer__heart {
+    color: var(--terracotta);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .footer__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .footer__wave {
+        display: none;
+    }
+
+    .footer__grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-bottom: var(--space-md);
+    }
+
+    /* Keep brand section visible, hide Quick Links, Contact, Newsletter */
+    .footer__brand {
+        display: block;
+    }
+
+    .footer__brand .footer__logo {
+        display: none;
+    }
+
+    .footer__section {
+        display: none;
+    }
+
+    .footer__social {
+        justify-content: center;
+    }
+
+    .footer__bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding-top: var(--space-xl);
+    }
+}
