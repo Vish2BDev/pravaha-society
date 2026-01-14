@@ -3,9 +3,14 @@ import { ArrowUpRight } from 'lucide-react'
 import './PageStyles.css'
 
 const Members = () => {
-    const [visible, setVisible] = useState(false)
+    const [leadershipVisible, setLeadershipVisible] = useState(false)
+    const [teamVisible, setTeamVisible] = useState(false)
+    const [joinVisible, setJoinVisible] = useState(false)
     const [hoveredMember, setHoveredMember] = useState(null)
-    const sectionRef = useRef(null)
+
+    const leadershipRef = useRef(null)
+    const teamRef = useRef(null)
+    const joinRef = useRef(null)
 
     const secretary = {
         name: 'Priya Sharma',
@@ -33,20 +38,29 @@ const Members = () => {
     ]
 
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => { if (entry.isIntersecting) setVisible(true) },
-            { threshold: 0.1 }
-        )
-        if (sectionRef.current) observer.observe(sectionRef.current)
+        const observerOptions = { threshold: 0.15 }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target === leadershipRef.current) setLeadershipVisible(true)
+                    if (entry.target === teamRef.current) setTeamVisible(true)
+                    if (entry.target === joinRef.current) setJoinVisible(true)
+                }
+            })
+        }, observerOptions)
+
+        if (leadershipRef.current) observer.observe(leadershipRef.current)
+        if (teamRef.current) observer.observe(teamRef.current)
+        if (joinRef.current) observer.observe(joinRef.current)
+
         return () => observer.disconnect()
     }, [])
 
     return (
         <div className="page members">
-
-
             {/* Leadership Section */}
-            <section className="members__leadership">
+            <section className={`members__leadership ${leadershipVisible ? 'animate-in' : ''}`} ref={leadershipRef}>
                 <div className="container">
                     <div className="members__exec-grid">
                         {/* Secretary */}
@@ -65,7 +79,7 @@ const Members = () => {
                         </div>
 
                         {/* Deputy Secretary */}
-                        <div className="members__leader">
+                        <div className="members__leader" style={{ transitionDelay: '0.2s' }}>
                             <div className="members__leader-image">
                                 <img src={deputySecretary.image} alt={deputySecretary.name} />
                             </div>
@@ -83,10 +97,10 @@ const Members = () => {
             </section>
 
             {/* Team Grid */}
-            <section className="members__team" ref={sectionRef}>
+            <section className={`members__team ${teamVisible ? 'animate-in' : ''}`} ref={teamRef}>
                 <div className="container">
                     <h2 className="members__team-title">Core Team</h2>
-                    <div className={`members__grid ${visible ? 'visible' : ''}`}>
+                    <div className="members__grid">
                         {team.map((member, index) => (
                             <article
                                 key={member.id}
@@ -109,7 +123,7 @@ const Members = () => {
             </section>
 
             {/* Join CTA */}
-            <section className="members__join">
+            <section className={`members__join ${joinVisible ? 'animate-in' : ''}`} ref={joinRef}>
                 <div className="container">
                     <h2>Join Our Team</h2>
                     <p>We're always looking for passionate dancers to join our community.</p>

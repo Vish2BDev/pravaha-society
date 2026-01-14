@@ -81,7 +81,21 @@
     border-radius: 4px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     will-change: transform;
-    transition: box-shadow 0.3s ease;
+    /* Soft, slow transition for that "elegant/floaty" sensation */
+    transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.3s ease,
+        filter 1s ease;
+}
+
+/* 1px Inner Border for premium feel */
+.gallery-preview__item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 2;
 }
 
 .gallery-preview__item:hover {
