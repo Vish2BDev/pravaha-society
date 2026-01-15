@@ -100,7 +100,8 @@
     background: var(--deep-navy);
     opacity: 0;
     transform: translateY(40px);
-    transition: all 0.8s var(--ease-out-expo);
+    transition: transform 0.8s var(--ease-out-expo), opacity 0.8s var(--ease-out-expo);
+    will-change: transform, opacity;
 }
 
 .about__story.visible {
@@ -163,8 +164,9 @@
     padding: var(--space-5xl) 0;
     background: rgba(16, 64, 76, 0.15);
     opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s var(--ease-out-expo);
+    transform: translate3d(0, 40px, 0);
+    transition: transform 0.8s var(--ease-out-expo), opacity 0.8s var(--ease-out-expo);
+    will-change: transform, opacity;
 }
 
 .about__values.visible {
@@ -220,7 +222,8 @@
     background: var(--deep-navy);
     text-align: center;
     opacity: 0;
-    transition: all 0.8s var(--ease-out-expo);
+    transition: opacity 0.8s var(--ease-out-expo);
+    will-change: opacity;
 }
 
 .about__quote.visible {
@@ -248,7 +251,8 @@
     padding: var(--space-4xl) 0;
     background: rgba(193, 141, 81, 0.08);
     opacity: 0;
-    transition: all 0.8s var(--ease-out-expo);
+    transition: opacity 0.8s var(--ease-out-expo);
+    will-change: opacity;
 }
 
 .about__stats.visible {
@@ -630,16 +634,13 @@
 @keyframes fadeSlideUp {
     from {
         opacity: 0;
-        transform: translateY(30px) scale(0.98);
-        /* Added scale for depth */
-        filter: blur(8px);
-        /* Soft focus start */
+        transform: translate3d(0, 30px, 0) scale(0.98);
+        /* Scale is cheaper than blur */
     }
 
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
+        transform: translate3d(0, 0, 0) scale(1);
     }
 }
 
@@ -1714,12 +1715,12 @@
 @keyframes slideUpFade {
     from {
         opacity: 0;
-        transform: translateY(40px);
+        transform: translate3d(0, 40px, 0);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate3d(0, 0, 0);
     }
 }
 

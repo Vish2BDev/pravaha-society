@@ -158,7 +158,7 @@ const Gallery = () => {
                                     className={`gallery__reel-item gallery__reel-item--${item.aspect}`}
                                     onClick={() => openLightbox(item, activeYear)}
                                 >
-                                    <img src={item.src} alt={item.title} loading="lazy" />
+                                    <img src={item.src} alt={item.title} loading="lazy" decoding="async" />
                                     <figcaption>{item.title}</figcaption>
                                 </div>
                             ))}
@@ -175,7 +175,7 @@ const Gallery = () => {
                                         className="gallery__mobile-grid-item"
                                         onClick={() => openLightbox(item, activeYear)}
                                     >
-                                        <img src={item.src} alt={item.title} loading="lazy" />
+                                        <img src={item.src} alt={item.title} loading="lazy" decoding="async" />
                                     </div>
                                 ))}
                             </div>
@@ -211,7 +211,7 @@ const Gallery = () => {
                                     className="gallery__reel-item gallery__reel-item--video"
                                     onClick={() => openLightbox(video, 'videos')}
                                 >
-                                    <img src={video.src} alt={video.title} loading="lazy" />
+                                    <img src={video.src} alt={video.title} loading="lazy" decoding="async" />
                                     <div className="gallery__play-btn">
                                         <Play size={24} fill="currentColor" />
                                     </div>
@@ -233,7 +233,7 @@ const Gallery = () => {
                                         className="gallery__mobile-grid-item gallery__mobile-grid-item--video"
                                         onClick={() => openLightbox(video, 'videos')}
                                     >
-                                        <img src={video.src} alt={video.title} loading="lazy" />
+                                        <img src={video.src} alt={video.title} loading="lazy" decoding="async" />
                                         <div className="gallery__play-btn">
                                             <Play size={20} fill="currentColor" />
                                         </div>

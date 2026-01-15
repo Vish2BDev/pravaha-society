@@ -102,7 +102,7 @@ const Stories = () => {
                             >
                                 <div className="story-card__image-container">
                                     <div className="story-card__image">
-                                        <img src={story.image} alt={story.name} />
+                                        <img src={story.image} alt={story.name} loading="lazy" decoding="async" />
                                     </div>
                                 </div>
                                 <div className="story-card__content">

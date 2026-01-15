@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import './PageStyles.css'
+import AboutHeroImg from '../assets/images/about-hero.jpg'
 
 const About = () => {
     const [visibleSections, setVisibleSections] = useState({})
@@ -39,8 +40,10 @@ const About = () => {
             <section className="about__hero">
                 <div className="about__hero-bg">
                     <img
-                        src="https://images.unsplash.com/photo-1508700929628-666bc8bd84ea?w=1920&h=1080&fit=crop"
-                        alt="Dance performance"
+                        src={AboutHeroImg}
+                        alt="Pravaha Team"
+                        loading="eager"
+                        decoding="async"
                     />
                     <div className="about__hero-overlay" />
                 </div>
@@ -81,6 +84,8 @@ const About = () => {
                             <img
                                 src="https://images.unsplash.com/photo-1535525153412-5a42439a210d?w=800&h=1000&fit=crop"
                                 alt="Dancers in motion"
+                                loading="lazy"
+                                decoding="async"
                             />
                         </div>
                     </div>

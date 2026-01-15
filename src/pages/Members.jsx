@@ -66,7 +66,7 @@ const Members = () => {
                         {/* Secretary */}
                         <div className="members__leader">
                             <div className="members__leader-image">
-                                <img src={secretary.image} alt={secretary.name} />
+                                <img src={secretary.image} alt={secretary.name} loading="lazy" decoding="async" />
                             </div>
                             <div className="members__leader-content">
                                 <span className="members__leader-role">{secretary.role}</span>
@@ -81,7 +81,7 @@ const Members = () => {
                         {/* Deputy Secretary */}
                         <div className="members__leader" style={{ transitionDelay: '0.2s' }}>
                             <div className="members__leader-image">
-                                <img src={deputySecretary.image} alt={deputySecretary.name} />
+                                <img src={deputySecretary.image} alt={deputySecretary.name} loading="lazy" decoding="async" />
                             </div>
                             <div className="members__leader-content">
                                 <span className="members__leader-role">{deputySecretary.role}</span>
@@ -110,7 +110,7 @@ const Members = () => {
                                 onMouseLeave={() => setHoveredMember(null)}
                             >
                                 <div className="member-card__image">
-                                    <img src={member.image} alt={member.name} />
+                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" />
                                 </div>
                                 <div className="member-card__info">
                                     <h3>{member.name}</h3>
