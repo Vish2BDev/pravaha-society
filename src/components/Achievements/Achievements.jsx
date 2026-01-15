@@ -5,6 +5,7 @@ const Achievements = () => {
     const [visible, setVisible] = useState(false)
     const [activeItem, setActiveItem] = useState(null)
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+    const [hasMoved, setHasMoved] = useState(false)
     const sectionRef = useRef(null)
 
     const achievements = [
@@ -51,6 +52,12 @@ const Achievements = () => {
 
     const handleMouseMove = (e) => {
         setMousePos({ x: e.clientX, y: e.clientY })
+        setHasMoved(true)
+    }
+
+    const handleMouseLeave = () => {
+        setActiveItem(null)
+        setHasMoved(false)
     }
 
     return (
@@ -58,6 +65,7 @@ const Achievements = () => {
             className={`achievements ${visible ? 'visible' : ''}`}
             ref={sectionRef}
             onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
         >
             <div className="achievements__container container">
                 <div className="achievements__header">
@@ -65,12 +73,12 @@ const Achievements = () => {
                     <h2 className="achievements__title">Awards & Performances</h2>
                 </div>
 
-                {/* Hover Image */}
+                {/* Hover Image - only show if mouse has moved */}
                 <div
-                    className={`achievements__hover-image ${activeItem ? 'active' : ''}`}
+                    className={`achievements__hover-image ${activeItem && hasMoved ? 'active' : ''}`}
                     style={{ left: mousePos.x, top: mousePos.y }}
                 >
-                    {activeItem && (
+                    {activeItem && hasMoved && (
                         <img src={achievements.find(a => a.id === activeItem)?.image} alt="" />
                     )}
                 </div>

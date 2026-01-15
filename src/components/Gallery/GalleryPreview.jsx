@@ -37,13 +37,13 @@ const GalleryPreview = () => {
             id: 6, // Bottom Far Left
             image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=400&fit=crop',
             start: { x: -5, y: 8, rotate: -3 },
-            end: { x: -150, y: 50, rotate: -8 },
+            end: { x: -150, y: 35, rotate: -8 },
         },
         {
             id: 7, // Bottom Far Right (Mirror of 6)
             image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=300&h=400&fit=crop',
             start: { x: 8, y: 12, rotate: 5 },
-            end: { x: 145, y: 60, rotate: 12 },
+            end: { x: 145, y: 40, rotate: 12 },
         },
         {
             id: 4, // Near Top Left
@@ -61,13 +61,13 @@ const GalleryPreview = () => {
             id: 8, // Near Bottom Left
             image: 'https://images.unsplash.com/photo-1546427660-eb346c344ba5?w=300&h=400&fit=crop',
             start: { x: -3, y: 15, rotate: -2 },
-            end: { x: -45, y: 65, rotate: -5 },
+            end: { x: -45, y: 40, rotate: -5 },
         },
         {
             id: 10, // Near Bottom Right (Mirror of 8)
             image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=300&h=400&fit=crop',
             start: { x: 3, y: 18, rotate: 2 },
-            end: { x: 60, y: 55, rotate: 8 },
+            end: { x: 60, y: 35, rotate: 8 },
         },
     ]
 
