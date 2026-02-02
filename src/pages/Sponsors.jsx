@@ -43,7 +43,7 @@ const Sponsors = () => {
                         <div className="sponsors__logos sponsors__logos--platinum">
                             {sponsors.platinum.map((sponsor) => (
                                 <div key={sponsor.id} className="sponsors__logo">
-                                    <img src={sponsor.logo} alt={sponsor.name} />
+                                    <img src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
                                 </div>
                             ))}
                         </div>
@@ -55,7 +55,7 @@ const Sponsors = () => {
                         <div className="sponsors__logos sponsors__logos--gold">
                             {sponsors.gold.map((sponsor) => (
                                 <div key={sponsor.id} className="sponsors__logo">
-                                    <img src={sponsor.logo} alt={sponsor.name} />
+                                    <img src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
                                 </div>
                             ))}
                         </div>
@@ -67,7 +67,7 @@ const Sponsors = () => {
                         <div className="sponsors__logos sponsors__logos--silver">
                             {sponsors.silver.map((sponsor) => (
                                 <div key={sponsor.id} className="sponsors__logo">
-                                    <img src={sponsor.logo} alt={sponsor.name} />
+                                    <img src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
                                 </div>
                             ))}
                         </div>

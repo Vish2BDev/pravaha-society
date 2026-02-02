@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import {
     Instagram,
     Youtube,
@@ -14,6 +14,8 @@ import './Footer.css'
 const Footer = () => {
     const [email, setEmail] = useState('')
     const [subscribed, setSubscribed] = useState(false)
+    const location = useLocation()
+    const isEventsPage = location.pathname === '/events'
 
     const handleSubscribe = (e) => {
         e.preventDefault()
@@ -41,16 +43,19 @@ const Footer = () => {
 
     return (
         <footer className="footer">
-            <div className="footer__wave">
-                <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-                    <path d="M0,40 C200,80 400,0 600,40 C800,80 1000,0 1200,40 C1300,60 1400,50 1440,40 L1440,100 L0,100 Z" />
-                </svg>
-            </div>
+            {!isEventsPage && (
+                <div className="footer__wave">
+                    <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+                        <path d="M0,40 C200,80 400,0 600,40 C800,80 1000,0 1200,40 C1300,60 1400,50 1440,40 L1440,100 L0,100 Z" />
+                    </svg>
+                </div>
+            )}
+
 
             <div className="footer__container container">
                 <div className="footer__grid">
-                    {/* Brand Section */}
-                    <div className="footer__brand">
+                    {/* Column 1: Brand & Contact */}
+                    <div className="footer__col-brand">
                         <Link to="/" className="footer__logo">
                             <div className="footer__logo-icon">
                                 <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -68,32 +73,26 @@ const Footer = () => {
                         </Link>
                         <p className="footer__tagline">We Lead By Serving</p>
                         <p className="footer__description">
-                            IITM BS Official Dance Society - Where passion meets expression through the art of dance.
+                            IITM BS Official Dance Society. Where passion meets expression through the art of dance.
                         </p>
-                        <div className="footer__social">
-                            {socialLinks.map((social, index) => (
-                                <a
-                                    key={index}
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="footer__social-link"
-                                    aria-label={social.label}
-                                >
-                                    <social.icon size={20} />
-                                </a>
-                            ))}
+
+                        <div className="footer__contact-minimal">
+                            <a href="mailto:pravaha@iitm.ac.in" className="footer__contact-link">
+                                <Mail size={16} /> pravaha@iitm.ac.in
+                            </a>
+                            <div className="footer__contact-text">
+                                <MapPin size={16} /> IIT Madras, Chennai
+                            </div>
                         </div>
                     </div>
 
-                    {/* Quick Links */}
-                    <div className="footer__section">
-                        <h3 className="footer__heading">Quick Links</h3>
+                    {/* Column 2: Navigation */}
+                    <div className="footer__col-links">
+                        <h3 className="footer__heading">Explore</h3>
                         <ul className="footer__links">
                             {quickLinks.map((link, index) => (
                                 <li key={index}>
                                     <Link to={link.path} className="footer__link">
-                                        <ArrowRight size={14} />
                                         {link.label}
                                     </Link>
                                 </li>
@@ -101,49 +100,48 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* Contact Info */}
-                    <div className="footer__section">
-                        <h3 className="footer__heading">Contact</h3>
-                        <div className="footer__contact">
-                            <div className="footer__contact-item">
-                                <MapPin size={18} />
-                                <span>IIT Madras, Chennai, India</span>
-                            </div>
-                            <div className="footer__contact-item">
-                                <Mail size={18} />
-                                <a href="mailto:pravaha@iitm.ac.in">pravaha@iitm.ac.in</a>
-                            </div>
-                            <div className="footer__contact-item">
-                                <Phone size={18} />
-                                <span>+91 98765 43210</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Newsletter */}
-                    <div className="footer__section footer__newsletter">
+                    {/* Column 3: Newsletter & Socials */}
+                    <div className="footer__col-engage">
                         <h3 className="footer__heading">Stay Updated</h3>
                         <p className="footer__newsletter-text">
-                            Subscribe to get updates on our latest events and performances.
+                            Subscribe for updates on our latest events.
                         </p>
                         <form className="footer__form" onSubmit={handleSubscribe}>
                             <div className="footer__input-wrapper">
                                 <input
                                     type="email"
-                                    placeholder="Your email address"
+                                    placeholder="Email address"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     className="footer__input"
                                     required
                                 />
                                 <button type="submit" className="footer__submit">
-                                    {subscribed ? '✓' : <ArrowRight size={18} />}
+                                    {subscribed ? '✓' : <ArrowRight size={16} />}
                                 </button>
                             </div>
                             {subscribed && (
-                                <p className="footer__success">Thank you for subscribing!</p>
+                                <p className="footer__success">Thank you!</p>
                             )}
                         </form>
+
+                        <div className="footer__social-group">
+                            <h4 className="footer__subheading">Follow Us</h4>
+                            <div className="footer__social">
+                                {socialLinks.map((social, index) => (
+                                    <a
+                                        key={index}
+                                        href={social.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="footer__social-link"
+                                        aria-label={social.label}
+                                    >
+                                        <social.icon size={18} />
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
 

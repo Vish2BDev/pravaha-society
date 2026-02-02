@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Send, Check } from 'lucide-react'
 import './PageStyles.css'
 
@@ -10,6 +10,8 @@ const Contact = () => {
         message: '',
     })
     const [submitted, setSubmitted] = useState(false)
+    const [visible, setVisible] = useState(false)
+    const sectionRef = useRef(null)
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -22,12 +24,21 @@ const Contact = () => {
         setFormData({ name: '', email: '', subject: '', message: '' })
     }
 
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) setVisible(true) },
+            { threshold: 0.1 }
+        )
+        if (sectionRef.current) observer.observe(sectionRef.current)
+        return () => observer.disconnect()
+    }, [])
+
     return (
         <div className="page contact">
 
 
             {/* Split Layout */}
-            <section className="contact__main">
+            <section className={`contact__main ${visible ? 'animate-in' : ''}`} ref={sectionRef}>
                 <div className="contact__image">
                     <img
                         src="https://images.unsplash.com/photo-1508700929628-666bc8bd84ea?w=1200&h=1600&fit=crop"
