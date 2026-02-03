@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
-import { ArrowUpRight, Sparkles, Users, ChevronRight } from 'lucide-react'
+import { ArrowUpRight, Sparkles, Users, ChevronRight, Mail, Instagram } from 'lucide-react'
 import './PageStyles.css'
 
 /**
@@ -13,69 +13,132 @@ import './PageStyles.css'
  * Architecture:
  * - Year toggle for historical navigation
  * - Persistent Join CTA (aspiration engine)
- * - Editorial leadership layout (asymmetric, premium)
- * - Core team grid (collective identity)
+ * - Side-by-side leadership layout (equal prominence)
+ * - Departmental core team grid (collective identity)
  * ═══════════════════════════════════════════════════════════════
  */
 
 // ═══════════════════════════════════════════════════════════════
-// TEAM DATA — Structured by Academic Year
+// TEAM DATA — Structured by Academic Year (Real Pravaha Data)
 // ═══════════════════════════════════════════════════════════════
 const TEAM_DATA = {
     '2025-2026': {
         leadership: {
             secretary: {
-                name: 'Priya Sharma',
+                name: 'Apoorva Bedade',
                 role: 'Secretary',
                 image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=800&fit=crop&crop=face',
-                bio: 'Leading Pravaha with passion and dedication. A trained Bharatanatyam dancer who believes in the transformative power of dance to build community.',
-                email: 'secretary@pravaha.iitm.ac.in',
-                linkedin: '#',
+                bio: "Life's rhythm may be unpredictable, but in its dance, we find our own flow.",
+                email: '24f2007547@ds.study.iitm.ac.in',
+                instagram: 'apuu__25',
+                department: 'All',
             },
             deputy: {
-                name: 'Arjun Menon',
+                name: 'Dhaarini Angel',
                 role: 'Deputy Secretary',
-                image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face',
-                bio: 'Blending traditional forms with contemporary styles. Focused on shaping the unique identity of our performances.',
+                image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=800&fit=crop&crop=face',
+                bio: 'Guiding Pravaha with creativity and vision, blending traditional forms with contemporary expression.',
                 email: 'deputy@pravaha.iitm.ac.in',
-                linkedin: '#',
+                instagram: '',
+                department: 'All',
             },
         },
-        coreTeam: [
-            { id: 1, name: 'Sneha Reddy', role: 'Creative Head', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&crop=face' },
-            { id: 2, name: 'Rahul Krishnan', role: 'Events Head', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face' },
-            { id: 3, name: 'Ananya Patel', role: 'Technical Lead', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&crop=face' },
-            { id: 4, name: 'Vikram Singh', role: 'Outreach Head', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=500&fit=crop&crop=face' },
-            { id: 5, name: 'Kavya Nair', role: 'Media Head', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=500&fit=crop&crop=face' },
-            { id: 6, name: 'Rohan Das', role: 'Finance Lead', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop&crop=face' },
+        departments: [
+            {
+                name: 'Executive Team',
+                members: [
+                    { id: 1, name: 'Veekshitha', role: 'Advisory Committee', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&crop=face', instagram: '' },
+                    { id: 2, name: 'Suja', role: 'Advisory Committee', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=500&fit=crop&crop=face', instagram: 'gnanasuja' },
+                    { id: 3, name: 'Jaya Ram Reddy', role: 'Event Coordinator', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face', instagram: 'im_jayaram__' },
+                ],
+            },
+            {
+                name: 'Design Wing',
+                members: [
+                    { id: 4, name: 'Aniruddh Singh', role: 'Design Wing Head', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face', instagram: 'hey_aniruddh' },
+                    { id: 5, name: 'Charishma', role: 'Design Wing Deputy', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&crop=face', instagram: '' },
+                    { id: 6, name: 'Kavya', role: 'Core Designer', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&crop=face', instagram: 'kavya.i_' },
+                    { id: 7, name: 'Aryan Singh', role: 'Design Volunteer', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=500&fit=crop&crop=face', instagram: 'inside_aryan' },
+                ],
+            },
+            {
+                name: 'Video Editing Wing',
+                members: [
+                    { id: 8, name: 'Piyush Tiwari', role: 'Video Editing Head', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop&crop=face', instagram: 'official___piyush' },
+                    { id: 9, name: 'Rahul Malaikani', role: 'Video Editing Deputy', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=500&fit=crop&crop=face', instagram: 'rahul.malaikani' },
+                    { id: 10, name: 'Lakshmi Nandan', role: 'Core Video Editor', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face', instagram: 'lakshminandankarri' },
+                    { id: 11, name: 'Adarsh', role: 'Standby Editor', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face', instagram: 'adarsh_adv056' },
+                ],
+            },
+            {
+                name: 'Content & Social Media',
+                members: [
+                    { id: 12, name: 'Nikunj', role: 'Social Media Head', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=500&fit=crop&crop=face', instagram: 'nikunjssharma' },
+                    { id: 13, name: 'Thaniya Pratyaini', role: 'Drafting Head', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&crop=face', instagram: 'thaniya_pratyaini' },
+                    { id: 14, name: 'Harini', role: 'Drafting Deputy', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&crop=face', instagram: 'dance_with_ini' },
+                    { id: 15, name: 'Bristi Biswas', role: 'Content Creator', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=500&fit=crop&crop=face', instagram: 'bristiforsure' },
+                ],
+            },
+            {
+                name: 'Outreach & PR',
+                members: [
+                    { id: 16, name: 'BVS Madhavi', role: 'Outreach Head', image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=500&fit=crop&crop=face', instagram: 'madhavi_.31' },
+                    { id: 17, name: 'Suparna', role: 'PR Head', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&crop=face', instagram: 'suparnavenkat._' },
+                    { id: 18, name: 'Anirudh', role: 'PR Deputy', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face', instagram: 'anirudh_vadrevu' },
+                    { id: 19, name: 'Muskan Agrawal', role: 'PR Coordinator', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&crop=face', instagram: 'muskann_agrwl' },
+                ],
+            },
+            {
+                name: 'Event Management',
+                members: [
+                    { id: 20, name: 'Vaishnavi Srivastava', role: 'Event Organizing Head', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=500&fit=crop&crop=face', instagram: 'al.ways_inquisitive' },
+                    { id: 21, name: 'Aditi Naduthota', role: 'Event Organizing Deputy', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&crop=face', instagram: '__aditi_thats_me' },
+                    { id: 22, name: 'Riya Sethi', role: 'Mindspace Head', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&crop=face', instagram: '_riya_sethi_' },
+                    { id: 23, name: 'Prashi Jain', role: 'Mindspace Deputy', image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=500&fit=crop&crop=face', instagram: 'prashijainn' },
+                ],
+            },
+            {
+                name: 'Choreography',
+                members: [
+                    { id: 24, name: 'Ricky', role: 'Choreography Head', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop&crop=face', instagram: 'naamisricky2' },
+                    { id: 25, name: 'Vaishnavi Saini', role: 'Choreography Deputy', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=500&fit=crop&crop=face', instagram: 'vaish.saini' },
+                ],
+            },
         ],
     },
     '2024-2025': {
         leadership: {
             secretary: {
-                name: 'Aditya Kumar',
+                name: 'Vishal Bhandari',
                 role: 'Secretary',
-                image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&h=800&fit=crop&crop=face',
-                bio: 'Led Pravaha through a transformative year with Dream2Dance 4.0 and multiple workshop collaborations.',
-                email: 'aditya.k@pravaha.iitm.ac.in',
-                linkedin: '#',
+                image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face',
+                bio: 'From a hesitant voice to leading hundreds, Pravaha became my playground for growth and my family for life.',
+                email: '22f1001645@ds.study.iitm.ac.in',
+                instagram: 'vish_4_infinity',
+                department: 'All',
             },
             deputy: {
-                name: 'Meera Iyer',
+                name: 'Praharsha Surampudi',
                 role: 'Deputy Secretary',
-                image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&h=800&fit=crop&crop=face',
-                bio: 'Championed classical dance forms while building bridges with contemporary artists.',
-                email: 'meera.i@pravaha.iitm.ac.in',
-                linkedin: '#',
+                image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&h=800&fit=crop&crop=face',
+                bio: 'Pravaha - "the flow that carried me from symphony of music to the voice of leadership"',
+                email: '22f1001433@study.iitm.ac.in',
+                instagram: 'thexsph',
+                department: 'All',
             },
         },
-        coreTeam: [
-            { id: 1, name: 'Karthik Rajan', role: 'Creative Head', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face' },
-            { id: 2, name: 'Divya Sundar', role: 'Events Head', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&crop=face' },
-            { id: 3, name: 'Sanjay Murthy', role: 'Technical Lead', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face' },
-            { id: 4, name: 'Preethi Nair', role: 'Outreach Head', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&crop=face' },
-            { id: 5, name: 'Ashwin Raj', role: 'Media Head', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=500&fit=crop&crop=face' },
-            { id: 6, name: 'Lakshmi Venkat', role: 'Finance Lead', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=500&fit=crop&crop=face' },
+        departments: [
+            {
+                name: 'Core Team',
+                members: [
+                    { id: 1, name: 'Aniruddh Singh', role: 'Design Wing Head', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face', instagram: 'hey_aniruddh' },
+                    { id: 2, name: 'Piyush Tiwari', role: 'Video Editing Head', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop&crop=face', instagram: 'official___piyush' },
+                    { id: 3, name: 'BVS Madhavi', role: 'Outreach Head', image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=500&fit=crop&crop=face', instagram: 'madhavi_.31' },
+                    { id: 4, name: 'Vaishnavi Srivastava', role: 'Event Organizing Head', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=500&fit=crop&crop=face', instagram: 'al.ways_inquisitive' },
+                    { id: 5, name: 'Riya Sethi', role: 'Mindspace Head', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&crop=face', instagram: '_riya_sethi_' },
+                    { id: 6, name: 'Thaniya Pratyaini', role: 'Drafting Head', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&crop=face', instagram: 'thaniya_pratyaini' },
+                ],
+            },
         ],
     },
     '2023-2024': {
@@ -84,9 +147,10 @@ const TEAM_DATA = {
                 name: 'Ravi Shankar',
                 role: 'Secretary',
                 image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=800&fit=crop&crop=face',
-                bio: 'Established the foundations of Pravaha\'s event culture with Dream2Dance 3.0 and the first Margazhi celebration.',
+                bio: "Established the foundations of Pravaha's event culture with Dream2Dance 3.0 and the first Margazhi celebration.",
                 email: 'ravi.s@pravaha.iitm.ac.in',
-                linkedin: '#',
+                instagram: '',
+                department: 'All',
             },
             deputy: {
                 name: 'Anjali Sharma',
@@ -94,14 +158,20 @@ const TEAM_DATA = {
                 image: 'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=600&h=800&fit=crop&crop=face',
                 bio: 'Pioneered the workshop series and built lasting partnerships with dance communities.',
                 email: 'anjali.s@pravaha.iitm.ac.in',
-                linkedin: '#',
+                instagram: '',
+                department: 'All',
             },
         },
-        coreTeam: [
-            { id: 1, name: 'Nikhil Prasad', role: 'Creative Head', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face' },
-            { id: 2, name: 'Swathi Kumar', role: 'Events Head', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&crop=face' },
-            { id: 3, name: 'Varun Reddy', role: 'Technical Lead', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face' },
-            { id: 4, name: 'Deepa Menon', role: 'Outreach Head', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&crop=face' },
+        departments: [
+            {
+                name: 'Founding Team',
+                members: [
+                    { id: 1, name: 'Nikhil Prasad', role: 'Creative Head', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face', instagram: '' },
+                    { id: 2, name: 'Swathi Kumar', role: 'Events Head', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&crop=face', instagram: '' },
+                    { id: 3, name: 'Varun Reddy', role: 'Technical Lead', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face', instagram: '' },
+                    { id: 4, name: 'Deepa Menon', role: 'Outreach Head', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&crop=face', instagram: '' },
+                ],
+            },
         ],
     },
 }
@@ -165,6 +235,250 @@ const Team = () => {
 
         return () => observer.disconnect()
     }, [])
+
+    return (
+        <div className="page team-chronicle">
+            {/* ════════════════════════════════════════════════════
+                SECTION 1: HERO HEADER
+                Join CTA + Year Toggle + Page Title
+                ════════════════════════════════════════════════════ */}
+            <section 
+                className={`team-chronicle__header ${headerVisible ? 'visible' : ''}`}
+                ref={headerRef}
+            >
+                <div className="team-chronicle__header-bg">
+                    <div className="team-chronicle__header-gradient" />
+                    <div className="team-chronicle__header-orb team-chronicle__header-orb--1" />
+                    <div className="team-chronicle__header-orb team-chronicle__header-orb--2" />
+                </div>
+
+                <div className="container">
+                    {/* Top Bar: Join CTA + Year Toggle */}
+                    <div className="team-chronicle__topbar">
+                        <a href="/contact" className="team-chronicle__join-cta">
+                            <Users size={16} />
+                            <span>Join Our Team</span>
+                            <ChevronRight size={16} className="team-chronicle__join-arrow" />
+                        </a>
+
+                        <div className="team-chronicle__year-toggle">
+                            {YEARS.map((year) => (
+                                <button
+                                    key={year.id}
+                                    className={`team-chronicle__year-btn ${selectedYear === year.id ? 'active' : ''}`}
+                                    onClick={() => handleYearChange(year.id)}
+                                >
+                                    {year.label}
+                                    {year.current && <span className="team-chronicle__year-current">Now</span>}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Page Title */}
+                    <div className="team-chronicle__intro">
+                        <div className="team-chronicle__eyebrow">
+                            <Sparkles size={14} />
+                            <span>The People Behind the Movement</span>
+                        </div>
+                        <h1 className="team-chronicle__title">
+                            <span className="team-chronicle__title-line">Our</span>{' '}
+                            <span className="team-chronicle__title-line team-chronicle__title-line--accent">Team</span>
+                        </h1>
+                        <p className="team-chronicle__subtitle">
+                            Where passion meets purpose, and leaders become legacy.
+                        </p>
+                    </div>
+
+                    {/* Year Indicator */}
+                    <div className="team-chronicle__year-indicator">
+                        <span className="team-chronicle__year-label">Leadership</span>
+                        <span className="team-chronicle__year-value">{YEARS.find(y => y.id === selectedYear)?.label}</span>
+                    </div>
+                </div>
+            </section>
+
+            {/* ════════════════════════════════════════════════════
+                SECTION 2: LEADERSHIP — SIDE BY SIDE EQUAL
+                Secretary + Deputy (Equal Prominence)
+                ════════════════════════════════════════════════════ */}
+            <section 
+                className={`team-chronicle__leadership ${leadershipVisible ? 'visible' : ''} ${isTransitioning ? 'transitioning' : ''}`}
+                ref={leadershipRef}
+            >
+                <div className="container">
+                    <div className="team-chronicle__leadership-duo">
+                        {/* Secretary */}
+                        <article className="team-chronicle__leader-card">
+                            <div className="team-chronicle__leader-card-image">
+                                <img 
+                                    src={currentTeam.leadership.secretary.image} 
+                                    alt={currentTeam.leadership.secretary.name}
+                                    loading="eager"
+                                />
+                                <div className="team-chronicle__leader-card-overlay" />
+                            </div>
+                            <div className="team-chronicle__leader-card-content">
+                                <span className="team-chronicle__leader-card-role">
+                                    {currentTeam.leadership.secretary.role}
+                                </span>
+                                <h2 className="team-chronicle__leader-card-name">
+                                    {currentTeam.leadership.secretary.name}
+                                </h2>
+                                <p className="team-chronicle__leader-card-bio">
+                                    {currentTeam.leadership.secretary.bio}
+                                </p>
+                                <div className="team-chronicle__leader-card-links">
+                                    <a 
+                                        href={`mailto:${currentTeam.leadership.secretary.email}`} 
+                                        className="team-chronicle__leader-card-link"
+                                        title="Email"
+                                    >
+                                        <Mail size={16} />
+                                    </a>
+                                    {currentTeam.leadership.secretary.instagram && (
+                                        <a 
+                                            href={`https://instagram.com/${currentTeam.leadership.secretary.instagram}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="team-chronicle__leader-card-link"
+                                            title="Instagram"
+                                        >
+                                            <Instagram size={16} />
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        </article>
+
+                        {/* Deputy Secretary */}
+                        <article className="team-chronicle__leader-card">
+                            <div className="team-chronicle__leader-card-image">
+                                <img 
+                                    src={currentTeam.leadership.deputy.image} 
+                                    alt={currentTeam.leadership.deputy.name}
+                                    loading="eager"
+                                />
+                                <div className="team-chronicle__leader-card-overlay" />
+                            </div>
+                            <div className="team-chronicle__leader-card-content">
+                                <span className="team-chronicle__leader-card-role">
+                                    {currentTeam.leadership.deputy.role}
+                                </span>
+                                <h2 className="team-chronicle__leader-card-name">
+                                    {currentTeam.leadership.deputy.name}
+                                </h2>
+                                <p className="team-chronicle__leader-card-bio">
+                                    {currentTeam.leadership.deputy.bio}
+                                </p>
+                                <div className="team-chronicle__leader-card-links">
+                                    <a 
+                                        href={`mailto:${currentTeam.leadership.deputy.email}`} 
+                                        className="team-chronicle__leader-card-link"
+                                        title="Email"
+                                    >
+                                        <Mail size={16} />
+                                    </a>
+                                    {currentTeam.leadership.deputy.instagram && (
+                                        <a 
+                                            href={`https://instagram.com/${currentTeam.leadership.deputy.instagram}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="team-chronicle__leader-card-link"
+                                            title="Instagram"
+                                        >
+                                            <Instagram size={16} />
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            {/* ════════════════════════════════════════════════════
+                SECTION 3: DEPARTMENTS — Organized by Wing
+                Departmental grid with headers
+                ════════════════════════════════════════════════════ */}
+            <section 
+                className={`team-chronicle__departments ${teamVisible ? 'visible' : ''} ${isTransitioning ? 'transitioning' : ''}`}
+                ref={teamRef}
+            >
+                <div className="container">
+                    <div className="team-chronicle__departments-header">
+                        <h2 className="team-chronicle__departments-title">Core Team</h2>
+                        <p className="team-chronicle__departments-subtitle">
+                            The driving force behind every performance
+                        </p>
+                    </div>
+
+                    {currentTeam.departments.map((department, deptIndex) => (
+                        <div key={department.name} className="team-chronicle__department">
+                            <h3 className="team-chronicle__department-name">{department.name}</h3>
+                            <div className="team-chronicle__department-grid">
+                                {department.members.map((member, index) => (
+                                    <article 
+                                        key={member.id}
+                                        className="team-chronicle__member"
+                                        style={{ '--delay': `${(deptIndex * 0.1) + (index * 0.08)}s` }}
+                                    >
+                                        <div className="team-chronicle__member-image">
+                                            <img 
+                                                src={member.image} 
+                                                alt={member.name}
+                                                loading="lazy"
+                                            />
+                                            <div className="team-chronicle__member-overlay">
+                                                {member.instagram && (
+                                                    <a 
+                                                        href={`https://instagram.com/${member.instagram}`}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="team-chronicle__member-social"
+                                                    >
+                                                        <Instagram size={18} />
+                                                    </a>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="team-chronicle__member-info">
+                                            <h4 className="team-chronicle__member-name">{member.name}</h4>
+                                            <p className="team-chronicle__member-role">{member.role}</p>
+                                        </div>
+                                    </article>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* ════════════════════════════════════════════════════
+                SECTION 4: JOIN CTA — BOTTOM REINFORCEMENT
+                Aspirational recruitment signal
+                ════════════════════════════════════════════════════ */}
+            <section className="team-chronicle__join">
+                <div className="container">
+                    <div className="team-chronicle__join-content">
+                        <h2 className="team-chronicle__join-title">
+                            Ready to Write Your Chapter?
+                        </h2>
+                        <p className="team-chronicle__join-text">
+                            Join the legacy of dancers, creators, and leaders who make Pravaha extraordinary.
+                        </p>
+                        <a href="/contact" className="team-chronicle__join-btn">
+                            <span>Apply to Join</span>
+                            <ArrowUpRight size={18} />
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    )
+}
+
+export default Team
 
     return (
         <div className="page team-chronicle">
