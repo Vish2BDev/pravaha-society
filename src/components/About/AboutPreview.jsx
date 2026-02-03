@@ -3,6 +3,72 @@ import { ArrowRight, Sparkles } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import './AboutPreview.css'
 
+/**
+ * CASCADING SHUTTER — 6-Image Layout System
+ *
+ * Narrative Flow: OFFLINE → COMMUNITY → WORKSHOP → LEADERSHIP → ONLINE → UNITY
+ * "Dance Has No Boundaries — And Neither Does Pravaha"
+ *
+ * Each image role:
+ * 1. ANCHOR    - Street Dance Battle (largest, hooks with energy)
+ * 2. LEAD      - Crowd/Fest Energy (reveals community scale)
+ * 3. RHYTHM-A  - Jodi Anoorabh Workshop (shows depth)
+ * 4. COUNTER   - BS Coordinators Dancing (humanizes leadership)
+ * 5. RHYTHM-B  - Online Operation/Reel'volution (USP reveal)
+ * 6. CLOSURE   - Online + Offline Unity (closes the loop)
+ */
+
+const cascadeImages = [
+    {
+        id: 1,
+        role: 'anchor',
+        alt: 'Street dance battle - Pravaha dancers in competition',
+        // Replace with actual Pravaha street battle image
+        src: 'https://images.unsplash.com/photo-1547153760-18fc86324498?w=600&h=780&fit=crop',
+        parallaxRate: 0.03,
+    },
+    {
+        id: 2,
+        role: 'lead',
+        alt: 'Crowd energy at Pravaha fest',
+        // Replace with actual Pravaha crowd/fest image
+        src: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=520&h=680&fit=crop',
+        parallaxRate: 0.035,
+    },
+    {
+        id: 3,
+        role: 'rhythm-a',
+        alt: 'Jodi Anoorabh workshop - partner dance training',
+        // Replace with actual Jodi Anoorabh workshop image
+        src: 'https://images.unsplash.com/photo-1508700929628-666bc8bd84ea?w=400&h=520&fit=crop',
+        parallaxRate: 0.04,
+    },
+    {
+        id: 4,
+        role: 'counter',
+        alt: 'BS Coordinators dancing with the community',
+        // Replace with actual coordinators dancing image
+        src: 'https://images.unsplash.com/photo-1535525153412-5a42439a210d?w=360&h=460&fit=crop',
+        parallaxRate: 0.045,
+    },
+    {
+        id: 5,
+        role: 'rhythm-b',
+        alt: 'Online dance session - Reel\'volution virtual performance',
+        // Replace with actual online operation/Reel'volution image
+        src: 'https://images.unsplash.com/photo-1518834107812-67b0b7c58434?w=300&h=390&fit=crop',
+        parallaxRate: 0.05,
+    },
+    {
+        id: 6,
+        role: 'closure',
+        alt: 'Online meets offline - Pravaha bridging digital and physical dance',
+        // Replace with actual unity/both-worlds image
+        src: 'https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=240&h=310&fit=crop',
+        parallaxRate: 0.06,
+    },
+]
+
 const AboutPreview = () => {
     const [visible, setVisible] = useState(false)
     const [scrollY, setScrollY] = useState(0)
@@ -40,50 +106,37 @@ const AboutPreview = () => {
                 <div className="about-preview__bg-orb about-preview__bg-orb--2" />
             </div>
 
-            {/* Floating Images - Break the grid */}
+            {/* Cascading Shutter — 6 Images */}
             <div className="about-preview__images">
-                <div
-                    className="about-preview__img about-preview__img--1"
-                    style={{ transform: `translateY(${scrollY * 0.5}px)` }}
-                >
-                    <div className="about-preview__img-frame">
-                        <img
-                            src="https://images.unsplash.com/photo-1547153760-18fc86324498?w=500&h=700&fit=crop"
-                            alt="Classical dance pose"
-                        />
-                        <div className="about-preview__img-overlay" />
+                {cascadeImages.map((image, index) => (
+                    <div
+                        key={image.id}
+                        className={`about-preview__img about-preview__img--${image.id}`}
+                        data-role={image.role}
+                    >
+                        <div
+                            className="about-preview__img-frame"
+                            style={{
+                                transform: `translateY(${scrollY * image.parallaxRate * (index % 2 === 0 ? 1 : -1)}px)`
+                            }}
+                        >
+                            <img
+                                src={image.src}
+                                alt={image.alt}
+                                loading={index < 2 ? 'eager' : 'lazy'}
+                                decoding="async"
+                            />
+                            <div className="about-preview__img-overlay" />
+                        </div>
                     </div>
-                </div>
-                <div
-                    className="about-preview__img about-preview__img--2"
-                    style={{ transform: `translateY(${-scrollY * 0.3}px)` }}
-                >
-                    <div className="about-preview__img-frame">
-                        <img
-                            src="https://images.unsplash.com/photo-1508700929628-666bc8bd84ea?w=400&h=500&fit=crop"
-                            alt="Dance performance"
-                        />
-                        <div className="about-preview__img-overlay" />
-                    </div>
-                </div>
-                <div
-                    className="about-preview__img about-preview__img--3"
-                    style={{ transform: `translateY(${scrollY * 0.4}px)` }}
-                >
-                    <div className="about-preview__img-frame">
-                        <img
-                            src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?w=300&h=400&fit=crop"
-                            alt="Dance practice"
-                        />
-                        <div className="about-preview__img-overlay" />
-                    </div>
-                </div>
+                ))}
             </div>
 
             {/* Decorative Elements */}
             <div className="about-preview__decorations">
                 <span className="about-preview__deco about-preview__deco--1" />
                 <span className="about-preview__deco about-preview__deco--2" />
+                <span className="about-preview__deco about-preview__deco--3" />
             </div>
 
             {/* Content */}
@@ -113,8 +166,8 @@ const AboutPreview = () => {
 
                     {/* Description */}
                     <p className="about-preview__desc">
-                        Pravaha is more than a dance society — it's a sanctuary where movement 
-                        becomes language, and every step tells a story. Here, tradition flows 
+                        Pravaha is more than a dance society — it's a sanctuary where movement
+                        becomes language, and every step tells a story. Here, tradition flows
                         into innovation, and passion transforms into art.
                     </p>
 

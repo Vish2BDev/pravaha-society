@@ -1,6 +1,9 @@
 /* ========================================
-   ABOUT PREVIEW — AWARD-GRADE IMPLEMENTATION
-   Cinematic Scroll-Driven Experience
+   ABOUT PREVIEW — CASCADING SHUTTER LAYOUT
+   Award-Grade 6-Image Diagonal Cascade
+
+   Narrative: "Dance Has No Boundaries"
+   OFFLINE → COMMUNITY → WORKSHOP → LEADERSHIP → ONLINE → UNITY
    ======================================== */
 
 /* ========================================
@@ -8,8 +11,9 @@
    ======================================== */
 .about-preview {
     position: relative;
-    min-height: 110vh;
-    padding: 120px 0 100px;
+    height: 100vh;
+    min-height: 850px;
+    max-height: 1200px;
     overflow: hidden;
 }
 
@@ -37,30 +41,30 @@
     position: absolute;
     border-radius: 50%;
     filter: blur(100px);
-    opacity: 0.4;
+    opacity: 0.35;
 }
 
 .about-preview__bg-orb--1 {
-    top: 10%;
-    right: 20%;
-    width: 400px;
-    height: 400px;
+    top: 5%;
+    right: 15%;
+    width: 450px;
+    height: 450px;
     background: radial-gradient(circle, var(--antique-gold), transparent 70%);
-    animation: orbFloat 15s ease-in-out infinite;
+    animation: orbFloat 18s ease-in-out infinite;
 }
 
 .about-preview__bg-orb--2 {
-    bottom: 20%;
-    left: 10%;
-    width: 300px;
-    height: 300px;
+    bottom: 15%;
+    left: 5%;
+    width: 350px;
+    height: 350px;
     background: radial-gradient(circle, var(--rich-teal), transparent 70%);
-    animation: orbFloat 18s ease-in-out infinite reverse;
+    animation: orbFloat 22s ease-in-out infinite reverse;
 }
 
 @keyframes orbFloat {
     0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(30px, -30px); }
+    50% { transform: translate(25px, -25px); }
 }
 
 /* ========================================
@@ -86,40 +90,94 @@
 }
 
 .about-preview__deco--1 {
-    top: 20%;
-    left: 30%;
+    top: 15%;
+    left: 42%;
     width: 6px;
     height: 6px;
-    animation: float 7s ease-in-out infinite;
+    animation: sparkle 4s ease-in-out infinite;
+    box-shadow: 0 0 15px 3px rgba(193, 141, 81, 0.4);
 }
 
 .about-preview__deco--2 {
-    bottom: 35%;
-    right: 25%;
-    width: 4px;
-    height: 4px;
-    animation: float 9s ease-in-out infinite reverse;
+    top: 45%;
+    right: 48%;
+    width: 5px;
+    height: 5px;
+    animation: sparkle 5s ease-in-out infinite 1s;
+    box-shadow: 0 0 12px 2px rgba(193, 141, 81, 0.35);
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+.about-preview__deco--3 {
+    top: 72%;
+    right: 52%;
+    width: 4px;
+    height: 4px;
+    animation: sparkle 6s ease-in-out infinite 2s;
+    box-shadow: 0 0 10px 2px rgba(193, 141, 81, 0.3);
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Golden Thread — Visual connection through cascade */
+.about-preview__decorations::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 45%;
+    width: 2px;
+    height: 55%;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(193, 141, 81, 0.15) 15%,
+        rgba(193, 141, 81, 0.25) 50%,
+        rgba(193, 141, 81, 0.15) 85%,
+        transparent 100%
+    );
+    transform: rotate(25deg);
+    opacity: 0;
+    transition: opacity 1.5s ease 0.8s;
+}
+
+.about-preview.visible .about-preview__decorations::before {
+    opacity: 1;
 }
 
 /* ========================================
-   FLOATING IMAGES
+   CASCADING SHUTTER — 6-IMAGE SYSTEM
+   Dramatic sweep utilizing full canvas
    ======================================== */
 .about-preview__images {
     position: absolute;
-    inset: 0;
-    pointer-events: none;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
     z-index: 2;
+    pointer-events: none;
 }
 
 .about-preview__img {
     position: absolute;
     overflow: hidden;
-    will-change: transform;
+    will-change: transform, opacity;
+    pointer-events: auto;
+
+    /* Base entrance animation state */
+    opacity: 0;
+    transition:
+        opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        z-index 0s;
 }
 
 .about-preview__img-frame {
@@ -127,103 +185,203 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: 8px;
     border: 1.5px solid rgba(193, 141, 81, 0.3);
     background: var(--deep-navy);
-    box-shadow: 
-        0 20px 40px -15px rgba(0, 0, 0, 0.4),
-        0 0 60px -20px rgba(193, 141, 81, 0.15);
+    box-shadow:
+        0 30px 60px -15px rgba(0, 0, 0, 0.6),
+        0 15px 35px -10px rgba(0, 0, 0, 0.4),
+        0 0 100px -30px rgba(193, 141, 81, 0.15),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    transition:
+        border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.about-preview__img:hover .about-preview__img-frame {
+    border-color: rgba(193, 141, 81, 0.6);
+    box-shadow:
+        0 40px 80px -15px rgba(0, 0, 0, 0.7),
+        0 20px 45px -10px rgba(0, 0, 0, 0.5),
+        0 0 120px -20px rgba(193, 141, 81, 0.25),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.about-preview__img:hover {
+    z-index: 10 !important;
+}
+
+.about-preview__img--1:hover { transform: rotate(-1deg) scale(1.03); }
+.about-preview__img--2:hover { transform: rotate(1.5deg) scale(1.03); }
+.about-preview__img--3:hover { transform: rotate(0.8deg) scale(1.03); }
+.about-preview__img--4:hover { transform: rotate(-1.2deg) scale(1.03); }
+.about-preview__img--5:hover { transform: rotate(1deg) scale(1.03); }
+.about-preview__img--6:hover { transform: rotate(-0.8deg) scale(1.03); }
 
 .about-preview__img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0;
-    transform: scale(1.1);
-    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.about-preview.visible .about-preview__img img {
-    opacity: 1;
-    transform: scale(1);
+    transform: scale(1.08);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .about-preview__img:hover img {
-    transform: scale(1.03);
+    transform: scale(1.02);
 }
 
 .about-preview__img-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
-        135deg,
-        rgba(193, 141, 81, 0.1) 0%,
+        145deg,
+        rgba(193, 141, 81, 0.12) 0%,
         transparent 50%,
-        rgba(31, 31, 55, 0.2) 100%
+        rgba(31, 31, 55, 0.25) 100%
     );
-    opacity: 0;
-    transition: opacity 0.6s ease;
+    opacity: 0.4;
+    transition: opacity 0.5s ease;
 }
 
 .about-preview__img:hover .about-preview__img-overlay {
-    opacity: 1;
+    opacity: 0.7;
 }
 
-/* Image Positions */
-.about-preview__img--1 {
-    top: 10%;
-    right: 6%;
-    width: 28%;
-    max-width: 360px;
-    aspect-ratio: 3/4;
-    z-index: 3;
-}
-
-.about-preview__img--1 img {
-    transition-delay: 0.2s;
-}
-
-.about-preview__img--2 {
-    top: 32%;
-    right: 28%;
-    width: 22%;
-    max-width: 260px;
-    aspect-ratio: 4/5;
+/* Cinematic top light reflection */
+.about-preview__img-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.03) 0%,
+        transparent 100%
+    );
     z-index: 2;
-}
-
-.about-preview__img--2 img {
-    transition-delay: 0.4s;
-}
-
-.about-preview__img--3 {
-    bottom: 15%;
-    right: 10%;
-    width: 16%;
-    max-width: 180px;
-    aspect-ratio: 3/4;
-    z-index: 1;
-}
-
-.about-preview__img--3 img {
-    transition-delay: 0.6s;
+    pointer-events: none;
 }
 
 /* ========================================
-   CONTENT
+   CASCADE POSITIONS — DRAMATIC DIAGONAL SWEEP
+   Award-winning composition utilizing FULL SPACE
+
+   Layout: Sweeping arc from top-right to bottom-left
+   Creates cinematic depth through scale and position
+   ======================================== */
+
+/* IMAGE 1: ANCHOR — Street Dance Battle (Dominant, Top Right) */
+.about-preview__img--1 {
+    top: 2%;
+    right: 1%;
+    width: 340px;
+    height: 440px;
+    z-index: 6;
+    transform: rotate(-1deg);
+}
+
+/* IMAGE 2: LEAD — Crowd Energy (Upper Left, creates width) */
+.about-preview__img--2 {
+    top: 5%;
+    right: 56%;
+    width: 280px;
+    height: 365px;
+    z-index: 5;
+    transform: rotate(1.5deg);
+}
+
+/* IMAGE 3: RHYTHM-A — Jodi Anoorabh Workshop (Center Right) */
+.about-preview__img--3 {
+    top: 44%;
+    right: 4%;
+    width: 220px;
+    height: 285px;
+    z-index: 4;
+    transform: rotate(0.8deg);
+}
+
+/* IMAGE 4: COUNTER — BS Coordinators (Center, bridging) */
+.about-preview__img--4 {
+    top: 36%;
+    right: 40%;
+    width: 195px;
+    height: 255px;
+    z-index: 3;
+    transform: rotate(-1.2deg);
+}
+
+/* IMAGE 5: RHYTHM-B — Online/Reel'volution (Lower Right) */
+.about-preview__img--5 {
+    top: 70%;
+    right: 20%;
+    width: 170px;
+    height: 220px;
+    z-index: 2;
+    transform: rotate(1deg);
+}
+
+/* IMAGE 6: CLOSURE — Unity (Bottom Left, anchors the sweep) */
+.about-preview__img--6 {
+    top: 64%;
+    right: 60%;
+    width: 150px;
+    height: 195px;
+    z-index: 1;
+    transform: rotate(-0.8deg);
+}
+
+/* ========================================
+   STAGGER ENTRANCE ANIMATIONS
+   Sequential cascade reveal (120ms intervals)
+   ======================================== */
+.about-preview.visible .about-preview__img {
+    opacity: 1;
+}
+
+.about-preview.visible .about-preview__img--1 {
+    transition-delay: 0ms;
+}
+
+.about-preview.visible .about-preview__img--2 {
+    transition-delay: 120ms;
+}
+
+.about-preview.visible .about-preview__img--3 {
+    transition-delay: 240ms;
+}
+
+.about-preview.visible .about-preview__img--4 {
+    transition-delay: 360ms;
+}
+
+.about-preview.visible .about-preview__img--5 {
+    transition-delay: 480ms;
+}
+
+.about-preview.visible .about-preview__img--6 {
+    transition-delay: 600ms;
+}
+
+/* ========================================
+   CONTENT — LEFT SIDE
    ======================================== */
 .about-preview__content {
-    position: relative;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40%;
+    height: 100%;
     z-index: 10;
-    max-width: 500px;
-    padding: 0 40px;
-    margin-left: 6%;
+    display: flex;
+    align-items: center;
+    padding: 0 4% 0 5%;
 }
 
 .about-preview__sticky {
-    position: sticky;
-    top: 22vh;
+    max-width: 400px;
 }
 
 /* Label Group */
@@ -234,7 +392,7 @@
     margin-bottom: 24px;
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
 }
 
 .about-preview.visible .about-preview__label-group {
@@ -269,9 +427,9 @@
 .about-preview__word {
     display: inline-block;
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-size: clamp(2rem, 4vw, 3.4rem);
     font-weight: 600;
-    line-height: 1.1;
+    line-height: 1.15;
     color: var(--soft-white);
     opacity: 0;
     transform: translateY(100%);
@@ -281,25 +439,25 @@
 .about-preview.visible .about-preview__line:nth-child(1) .about-preview__word {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 0.3s;
+    transition-delay: 0.2s;
 }
 
 .about-preview.visible .about-preview__line:nth-child(2) .about-preview__word {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 0.4s;
+    transition-delay: 0.3s;
 }
 
 .about-preview.visible .about-preview__line:nth-child(3) .about-preview__word {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 0.5s;
+    transition-delay: 0.4s;
 }
 
 .about-preview.visible .about-preview__line:nth-child(4) .about-preview__word {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 0.6s;
+    transition-delay: 0.5s;
 }
 
 .about-preview__line--accent .about-preview__word {
@@ -316,7 +474,7 @@
     margin-bottom: 32px;
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
 }
 
 .about-preview.visible .about-preview__desc {
@@ -331,7 +489,7 @@
     margin-bottom: 32px;
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.85s;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.75s;
 }
 
 .about-preview.visible .about-preview__stats {
@@ -371,7 +529,7 @@
     color: var(--soft-white);
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1s;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s;
 }
 
 .about-preview.visible .about-preview__cta {
@@ -423,12 +581,85 @@
 }
 
 /* ========================================
-   RESPONSIVE — TABLET
+   RESPONSIVE — LARGE DESKTOP (1440px+)
+   Maximum impact with dramatic scale
+   ======================================== */
+@media (min-width: 1440px) {
+    .about-preview__img--1 {
+        top: 2%;
+        right: 1%;
+        width: 380px;
+        height: 495px;
+        transform: rotate(-1deg);
+    }
+
+    .about-preview__img--2 {
+        top: 4%;
+        right: 52%;
+        width: 310px;
+        height: 405px;
+        transform: rotate(1.5deg);
+    }
+
+    .about-preview__img--3 {
+        top: 42%;
+        right: 3%;
+        width: 250px;
+        height: 325px;
+        transform: rotate(0.8deg);
+    }
+
+    .about-preview__img--4 {
+        top: 34%;
+        right: 38%;
+        width: 220px;
+        height: 285px;
+        transform: rotate(-1.2deg);
+    }
+
+    .about-preview__img--5 {
+        top: 68%;
+        right: 16%;
+        width: 190px;
+        height: 245px;
+        transform: rotate(1deg);
+    }
+
+    .about-preview__img--6 {
+        top: 62%;
+        right: 56%;
+        width: 165px;
+        height: 215px;
+        transform: rotate(-0.8deg);
+    }
+
+    /* Hover states for large desktop */
+    .about-preview__img--1:hover { transform: rotate(-1deg) scale(1.04); }
+    .about-preview__img--2:hover { transform: rotate(1.5deg) scale(1.04); }
+    .about-preview__img--3:hover { transform: rotate(0.8deg) scale(1.04); }
+    .about-preview__img--4:hover { transform: rotate(-1.2deg) scale(1.04); }
+    .about-preview__img--5:hover { transform: rotate(1deg) scale(1.04); }
+    .about-preview__img--6:hover { transform: rotate(-0.8deg) scale(1.04); }
+
+    .about-preview__content {
+        padding: 0 6%;
+    }
+
+    .about-preview__sticky {
+        max-width: 480px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE — TABLET (768px - 1024px)
+   "The Folded Shutter" — Compressed horizontal cascade
    ======================================== */
 @media (max-width: 1024px) {
     .about-preview {
+        height: auto;
         min-height: auto;
-        padding: 120px 0;
+        max-height: none;
+        padding: 80px 0;
     }
 
     .about-preview__bg-orb--1 {
@@ -441,124 +672,228 @@
         height: 200px;
     }
 
-    .about-preview__images {
-        position: relative;
-        height: 55vh;
-        margin-bottom: 64px;
-    }
-
-    .about-preview__img--1 {
-        top: 5%;
-        right: 5%;
-        width: 48%;
-    }
-
-    .about-preview__img--2 {
-        top: 28%;
-        right: 42%;
-        width: 32%;
-    }
-
-    .about-preview__img--3 {
-        bottom: 5%;
-        right: 12%;
-        width: 28%;
-    }
-
+    /* Stack content above images */
     .about-preview__content {
-        max-width: 100%;
-        margin-left: 0;
+        position: relative;
+        width: 100%;
+        height: auto;
         padding: 0 48px;
+        margin-bottom: 48px;
     }
 
     .about-preview__sticky {
+        max-width: 600px;
+    }
+
+    /* Images container becomes relative */
+    .about-preview__images {
         position: relative;
-        top: auto;
+        width: 100%;
+        height: 65vh;
+        min-height: 500px;
     }
 
-    .about-preview__stats {
-        gap: 40px;
+    /* Dramatic sweep for tablet — utilize full space */
+    .about-preview__img--1 {
+        top: 0;
+        right: 0;
+        left: auto;
+        width: 220px;
+        height: 285px;
+        transform: rotate(-1deg);
     }
 
-    .about-preview__stat-number {
-        font-size: 32px;
+    .about-preview__img--2 {
+        top: 3%;
+        right: auto;
+        left: 2%;
+        width: 190px;
+        height: 245px;
+        transform: rotate(1.2deg);
+    }
+
+    .about-preview__img--3 {
+        top: 35%;
+        right: 5%;
+        left: auto;
+        width: 170px;
+        height: 220px;
+        transform: rotate(0.6deg);
+    }
+
+    .about-preview__img--4 {
+        top: 32%;
+        right: auto;
+        left: 15%;
+        width: 150px;
+        height: 195px;
+        transform: rotate(-1deg);
+    }
+
+    .about-preview__img--5 {
+        top: 62%;
+        right: 18%;
+        left: auto;
+        width: 135px;
+        height: 175px;
+        transform: rotate(0.8deg);
+    }
+
+    /* Show all 6 on tablet */
+    .about-preview__img--6 {
+        display: block;
+        top: 58%;
+        right: auto;
+        left: 5%;
+        width: 120px;
+        height: 155px;
+        transform: rotate(-0.6deg);
+    }
+
+    .about-preview__deco--3 {
+        display: none;
     }
 }
 
 /* ========================================
-   RESPONSIVE — MOBILE
+   RESPONSIVE — MOBILE (< 768px)
+   "The Vertical Rhythm Strip" — 2-column offset grid
    ======================================== */
 @media (max-width: 768px) {
     .about-preview {
-        padding: 80px 0;
+        padding: 64px 0;
     }
 
     .about-preview__bg-orb {
         display: none;
     }
 
-    .about-preview__images {
-        height: 40vh;
-        margin-bottom: 48px;
-    }
-
-    .about-preview__img--2,
-    .about-preview__img--3 {
-        display: none;
-    }
-
-    .about-preview__img--1 {
-        top: 50%;
-        left: 50%;
-        right: auto;
-        transform: translate(-50%, -50%);
-        width: 85%;
-        max-width: 320px;
-    }
-
     .about-preview__content {
         padding: 0 24px;
         text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .about-preview__sticky {
+        max-width: 100%;
     }
 
     .about-preview__label-group {
         justify-content: center;
     }
 
-    .about-preview__headline {
-        margin-bottom: 24px;
-    }
-
     .about-preview__word {
-        font-size: clamp(2rem, 8vw, 3rem);
+        font-size: clamp(1.8rem, 8vw, 2.8rem);
     }
 
     .about-preview__desc {
-        font-size: 15px;
+        font-size: 14px;
         line-height: 1.75;
-        margin-bottom: 32px;
     }
 
     .about-preview__stats {
         justify-content: center;
         gap: 32px;
-        margin-bottom: 32px;
     }
 
     .about-preview__stat {
         align-items: center;
     }
 
-    .about-preview__stat-number {
-        font-size: 28px;
-    }
-
-    .about-preview__stat-label {
-        font-size: 10px;
-    }
-
     .about-preview__cta {
         justify-content: center;
+    }
+
+    /* Rhythm Strip — 2-column offset grid */
+    .about-preview__images {
+        position: relative;
+        width: 100%;
+        height: auto;
+        min-height: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        padding: 0 20px;
+    }
+
+    /* Reset all absolute positioning */
+    .about-preview__img {
+        position: relative;
+        top: auto !important;
+        right: auto !important;
+        left: auto !important;
+        bottom: auto !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .about-preview__img-frame {
+        aspect-ratio: 3/4;
+    }
+
+    /* Row 1: Large left, Small right (offset up) */
+    .about-preview__img--1 {
+        grid-column: 1;
+        grid-row: 1;
+        transform: rotate(-0.5deg);
+    }
+
+    .about-preview__img--2 {
+        grid-column: 2;
+        grid-row: 1;
+        transform: translateY(24px) rotate(0.8deg);
+    }
+
+    /* Row 2: Small left (offset), Large right */
+    .about-preview__img--3 {
+        grid-column: 1;
+        grid-row: 2;
+        transform: rotate(0.5deg);
+    }
+
+    .about-preview__img--4 {
+        grid-column: 2;
+        grid-row: 2;
+        transform: translateY(-12px) rotate(-0.6deg);
+    }
+
+    /* Row 3: Medium left, Small right (offset) */
+    .about-preview__img--5 {
+        grid-column: 1;
+        grid-row: 3;
+        transform: rotate(-0.4deg);
+    }
+
+    .about-preview__img--6 {
+        display: block;
+        grid-column: 2;
+        grid-row: 3;
+        transform: translateY(16px) rotate(0.5deg);
+    }
+
+    /* Override stagger for visible state on mobile */
+    .about-preview.visible .about-preview__img--1 {
+        transform: rotate(-0.5deg);
+    }
+
+    .about-preview.visible .about-preview__img--2 {
+        transform: translateY(24px) rotate(0.8deg);
+    }
+
+    .about-preview.visible .about-preview__img--3 {
+        transform: rotate(0.5deg);
+    }
+
+    .about-preview.visible .about-preview__img--4 {
+        transform: translateY(-12px) rotate(-0.6deg);
+    }
+
+    .about-preview.visible .about-preview__img--5 {
+        transform: rotate(-0.4deg);
+    }
+
+    .about-preview.visible .about-preview__img--6 {
+        transform: translateY(16px) rotate(0.5deg);
     }
 
     .about-preview__deco {
@@ -566,32 +901,30 @@
     }
 }
 
+/* ========================================
+   RESPONSIVE — SMALL MOBILE (< 480px)
+   ======================================== */
 @media (max-width: 480px) {
     .about-preview {
-        padding: 64px 0;
-    }
-
-    .about-preview__images {
-        height: 35vh;
-        margin-bottom: 40px;
-    }
-
-    .about-preview__img--1 {
-        width: 90%;
-        max-width: 280px;
+        padding: 48px 0;
     }
 
     .about-preview__content {
-        padding: 0 20px;
+        padding: 0 16px;
+        margin-bottom: 32px;
     }
 
     .about-preview__word {
-        font-size: clamp(1.75rem, 10vw, 2.5rem);
+        font-size: clamp(1.6rem, 9vw, 2.4rem);
     }
 
     .about-preview__label {
         font-size: 10px;
         letter-spacing: 0.2em;
+    }
+
+    .about-preview__desc {
+        font-size: 13px;
     }
 
     .about-preview__stats {
@@ -606,10 +939,16 @@
         width: 40px;
         height: 40px;
     }
+
+    .about-preview__images {
+        gap: 12px;
+        padding: 0 16px;
+    }
 }
 
 /* ========================================
    REDUCED MOTION
+   Accessibility-first approach
    ======================================== */
 @media (prefers-reduced-motion: reduce) {
     .about-preview__word,
@@ -617,15 +956,22 @@
     .about-preview__desc,
     .about-preview__stats,
     .about-preview__cta,
+    .about-preview__img,
     .about-preview__img img,
-    .about-preview__deco {
+    .about-preview__deco,
+    .about-preview__img-frame {
         opacity: 1;
-        transform: none;
+        transform: none !important;
         animation: none;
         transition: none;
     }
 
     .about-preview__bg-orb {
         animation: none;
+    }
+
+    .about-preview__cta-text::after,
+    .about-preview__cta-icon {
+        transition: none;
     }
 }
