@@ -109,6 +109,35 @@ html {
   font-size: 16px;
 }
 
+/* Selection styling */
+::selection {
+  background: var(--antique-gold);
+  color: var(--deep-navy);
+}
+
+::-moz-selection {
+  background: var(--antique-gold);
+  color: var(--deep-navy);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--deep-navy);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(193, 141, 81, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(193, 141, 81, 0.5);
+}
+
 body {
   font-family: var(--font-body);
   font-size: var(--text-base);

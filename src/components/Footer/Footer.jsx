@@ -4,11 +4,12 @@ import {
     Instagram,
     Youtube,
     Mail,
-    Phone,
     MapPin,
     ArrowRight,
-    Heart
+    Heart,
+    Sparkles
 } from 'lucide-react'
+import PravahaLogo from '../../assets/images/pravaha-logo.png'
 import './Footer.css'
 
 const Footer = () => {
@@ -43,6 +44,11 @@ const Footer = () => {
 
     return (
         <footer className="footer">
+            {/* Background Elements */}
+            <div className="footer__bg">
+                <div className="footer__bg-gradient" />
+            </div>
+
             {!isEventsPage && (
                 <div className="footer__wave">
                     <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
@@ -51,27 +57,20 @@ const Footer = () => {
                 </div>
             )}
 
-
             <div className="footer__container container">
                 <div className="footer__grid">
                     {/* Column 1: Brand & Contact */}
                     <div className="footer__col-brand">
                         <Link to="/" className="footer__logo">
                             <div className="footer__logo-icon">
-                                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="20" cy="20" r="18" stroke="url(#footer-logo-gradient)" strokeWidth="2" />
-                                    <path d="M20 8C20 8 28 14 28 22C28 26.4183 24.4183 30 20 30C15.5817 30 12 26.4183 12 22C12 14 20 8 20 8Z" fill="url(#footer-logo-gradient)" />
-                                    <defs>
-                                        <linearGradient id="footer-logo-gradient" x1="10" y1="10" x2="30" y2="30" gradientUnits="userSpaceOnUse">
-                                            <stop stopColor="#10404C" />
-                                            <stop offset="1" stopColor="#27142A" />
-                                        </linearGradient>
-                                    </defs>
-                                </svg>
+                                <img src={PravahaLogo} alt="Pravaha" />
                             </div>
                             <span className="footer__logo-text">PRAVAHA</span>
                         </Link>
-                        <p className="footer__tagline">We Lead By Serving</p>
+                        <p className="footer__tagline">
+                            <Sparkles size={12} className="footer__tagline-icon" />
+                            We Create Memories
+                        </p>
                         <p className="footer__description">
                             IITM BS Official Dance Society. Where passion meets expression through the art of dance.
                         </p>
