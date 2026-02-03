@@ -7,7 +7,7 @@ import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import About from './pages/About'
 import Events from './pages/Events'
-import Members from './pages/Members'
+import Team from './pages/Team'
 import Gallery from './pages/Gallery'
 import Stories from './pages/Stories'
 import Sponsors from './pages/Sponsors'
@@ -64,7 +64,7 @@ function App() {
             <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
             <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
             <Route path="/events" element={<PageWrapper><Events /></PageWrapper>} />
-            <Route path="/members" element={<PageWrapper><Members /></PageWrapper>} />
+            <Route path="/team" element={<PageWrapper><Team /></PageWrapper>} />
             <Route path="/gallery" element={<PageWrapper><Gallery /></PageWrapper>} />
             <Route path="/stories" element={<PageWrapper><Stories /></PageWrapper>} />
             <Route path="/sponsors" element={<PageWrapper><Sponsors /></PageWrapper>} />
